@@ -6,7 +6,7 @@ The way to decrease the number of listeners is to apply a single event listener 
 
 ## Example
 
-Imagine this HTML body content with some tiny piece od CSS
+Imagine this HTML body content with some tiny piece of CSS
 
 ```HTML
 <body>

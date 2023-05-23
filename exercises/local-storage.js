@@ -38,3 +38,50 @@
  */
 
 // Your code goes here...
+
+const container = document.querySelector('.cardsContainer');
+const cards = document.querySelectorAll('.card');
+
+const setBackgroundColor = () => {
+  const storageData = localStorage.getItem('favorites');
+  const storageArr = JSON.parse(storageData);
+
+  cards.forEach((card) => {
+    const id = card.id;
+    if (storageArr.includes(id)) {
+      card.classList.add('red');
+      card.dataset.fav = 'true';
+    } else {
+      card.dataset.fav = 'false';
+    }
+  });
+};
+
+const colorChange = (e) => {
+  const id = e.target.id;
+  const card = document.getElementById(id);
+  const newItem = id;
+  let storageData = localStorage.getItem('favorites');
+  const storageArr = JSON.parse(storageData);
+
+  if (card.dataset.fav === 'false') {
+    card.classList.add('red');
+    card.dataset.fav = 'true';
+    storageArr.push(newItem);
+    localStorage.setItem('favorites', JSON.stringify(storageArr));
+  } else {
+    card.classList.remove('red');
+    card.dataset.fav = 'false';
+    const index = storageArr.indexOf(newItem);
+    if (index > -1) {
+      storageArr.splice(index, 1);
+    }
+    localStorage.setItem('favorites', JSON.stringify(storageArr));
+  }
+};
+
+container.addEventListener('click', colorChange);
+
+setBackgroundColor();
+
+
