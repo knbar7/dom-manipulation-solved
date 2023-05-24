@@ -42,6 +42,10 @@
 const container = document.querySelector('.cardsContainer');
 const cards = document.querySelectorAll('.card');
 
+if (!localStorage.getItem('favorites')) {
+    localStorage.setItem('favorites', JSON.stringify([]));
+}
+
 const setBackgroundColor = () => {
   const storageData = localStorage.getItem('favorites');
   const storageArr = JSON.parse(storageData);
@@ -80,7 +84,11 @@ const colorChange = (e) => {
   }
 };
 
-container.addEventListener('click', colorChange);
+container.addEventListener('click', (e) => {
+    if (e.target.classList.contains('card') || e.target.closest('.card')) {
+      colorChange(e);
+    }
+  });
 
 setBackgroundColor();
 
